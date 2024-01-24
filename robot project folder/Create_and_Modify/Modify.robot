@@ -1,18 +1,21 @@
 *** Settings ***
-Documentation    This test folder tests the Create deck functionality
-Resource    Modify.resource
-Variables    Decklist-Najeela.json
-Suite Setup    Navigate to moxfield and sign-in    ${VALID_USERNAME}    ${VALID_PASSWORD}
-Suite Teardown    Log out of Moxfield and close the Browser
-Test Teardown    in moxfield Navigate to "Home"
+Documentation       This test folder tests the Create deck functionality
+
+Resource            Modify.resource
+Variables           Decklist-Najeela.json
+
+Suite Setup         Navigate to moxfield and sign-in    ${VALID_USERNAME}    ${VALID_PASSWORD}
+Suite Teardown      Log out of Moxfield and close the Browser
+Test Teardown       in moxfield Navigate to "Home"
+
 
 *** Variables ***
-${VALID_USERNAME}    Stasjo_test
-${VALID_PASSWORD}    testpartnerpassword1234
-${NAME_OF_THE_DECK}    test_deck
-${NAME_OF_FORMAT}    Commander / EDH
-${NAME_OF_COMMANDER}   Najeela, the Blade-Blossom
-${basic_land}    Mountain
+${VALID_USERNAME}       Stasjo_test
+${VALID_PASSWORD}       testpartnerpassword1234
+${NAME_OF_THE_DECK}     test_deck
+${NAME_OF_FORMAT}       Commander / EDH
+${NAME_OF_COMMANDER}    Najeela, the Blade-Blossom
+${basic_land}           Mountain
 
 
 *** Test Cases ***
@@ -68,7 +71,6 @@ Remove a card from Deck
     # Step 3: Remove a specific card (in this case, "Skullclamp") from the deck
     Remove a card from Deck    Skullclamp
 
-
 Delete a Deck on Moxfield
     [Documentation]    This test case navigates to "Your Decks" on Moxfield, deletes a specific deck, and confirms the deletion.
     [Tags]    suite_trail_run    deck-management
@@ -78,7 +80,7 @@ Delete a Deck on Moxfield
 
     # Step 2: Click on the vertical ellipsis to edit a deck's properties
     # and select "Delete Deck" for ${NAME_OF_THE_DECK}
-    Click on the verticle Elipsis to edit a decks properties in Moxfield   ${NAME_OF_THE_DECK}    Delete Deck
+    Click on the verticle Elipsis to edit a decks properties in Moxfield    ${NAME_OF_THE_DECK}    Delete Deck
 
     # Step 3: Click on the pop-up to permanently delete the deck
     Click on the pop-up to permanently delete your deck

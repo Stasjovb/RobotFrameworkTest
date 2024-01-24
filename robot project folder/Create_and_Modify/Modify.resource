@@ -1,14 +1,14 @@
 *** Settings ***
-Documentation    This resource file contains the keywords to create decks on Moxfield
-Library    Browser
-Library    OperatingSystem
-Library    JSONLibrary
-Library    Collections
-Library    String 
-Variables    Decklist-Najeela.json
-Resource    ../Generic_keywords.resource
+Documentation       This resource file contains the keywords to create decks on Moxfield
 
-*** Variables ***
+Library             Browser
+Library             OperatingSystem
+Library             JSONLibrary
+Library             Collections
+Library             String
+Variables           Decklist-Najeela.json
+Resource            ../Generic_keywords.resource
+
 
 *** Keywords ***
 Click on the verticle Elipsis to edit a decks properties in Moxfield
@@ -29,7 +29,7 @@ Click on the verticle Elipsis to edit a decks properties in Moxfield
 
 Click on the pop-up to permanently delete your deck
     [Documentation]    This keyword waits for the "Permanently Delete" option to appear on a pop-up and then clicks on it to confirm the permanent deletion of your deck.
-    
+
     # Step 1: Wait for the "Permanently Delete" option to appear on the pop-up
     Wait For Elements State    //span[contains(text(),'Permanently Delete')]
 
@@ -38,17 +38,17 @@ Click on the pop-up to permanently delete your deck
 
 Open decklist to add and remove cards
     [Documentation]    This keyword opens a decklist for adding and removing cards by navigating to it based on the specified deck name and format.
-    [Arguments]     ${Deck_name}    ${Format_name}
+    [Arguments]    ${Deck_name}    ${Format_name}
 
     # Step 1: Wait for the decklist element to be in the desired state
-    Wait For Elements State    (//tr[td/a[contains(text(),'${Deck_name}')] and td/span[contains(text(),'${Format_name}')]]/td/a)[1]
+    Wait For Elements State
+    ...    (//tr[td/a[contains(text(),'${Deck_name}')] and td/span[contains(text(),'${Format_name}')]]/td/a)[1]
 
     # Step 2: Click on the decklist to open it
     Click    (//tr[td/a[contains(text(),'${Deck_name}')] and td/span[contains(text(),'${Format_name}')]]/td/a)[1]
 
     # Step 3: Wait for the deck name element to be in the desired state
     Wait For Elements State    //span[contains(text(),'${Deck_name}')]
-
 
 Add a card to the Deck
     [Documentation]    This keyword adds a specified card to the deck.
@@ -71,14 +71,13 @@ Add lands to the deck
     Add a card to the Deck    ${card_name}
 
     # Step 2: Loop to add more copies until there are 36 copies
-    FOR  ${index}  IN RANGE  100
-        ${value}=    Get Attribute    //span[text()="${card_name}"]/../../../..//input    Value
+    FOR    ${index}    IN RANGE    100
+        ${value}    Get Attribute    //span[text()="${card_name}"]/../../../..//input    Value
 
         # Step 3: Check if there are already 36 copies in the deck
-        Run Keyword If    ${value} <= 36    Add a card to the Deck    ${card_name}
-        Exit For Loop If    ${value} >= 36
+        IF    ${value} <= 36    Add a card to the Deck    ${card_name}
+        IF    ${value} >= 36    BREAK
     END
-
 
 Add cards from a Json file to the Deck
     [Documentation]    This test case reads card names from a JSON file, cleans them by removing spaces, slashes, and square brackets, and then adds them to the deck one by one.
@@ -91,12 +90,12 @@ Add cards from a Json file to the Deck
     @{cardlist}    Get Value From Json    ${file}    $..name
 
     # Step 3: Loop through each card name and add it to the deck
-    FOR  ${Card}  IN   @{cardlist}
+    FOR    ${Card}    IN    @{cardlist}
         # Clean the card name by removing spaces, slashes, and square brackets
-        ${card_name} =    Replace String    ${Card}    " "    ""        # Remove spaces
-        ${card_name} =    Replace String    ${card_name}    "/"    ""    # Remove slashes
-        ${card_name} =    Replace String    ${card_name}    "["    ""    # Remove square brackets
-        ${card_name} =    Replace String    ${card_name}    "]"    ""
+        ${card_name}    Replace String    ${Card}    " "    ""    # Remove spaces
+        ${card_name}    Replace String    ${card_name}    "/"    ""    # Remove slashes
+        ${card_name}    Replace String    ${card_name}    "["    ""    # Remove square brackets
+        ${card_name}    Replace String    ${card_name}    "]"    ""
 
         # Log the cleaned card name (optional, for debugging)
         Log    Adding card to the Deck: ${card_name}
@@ -105,7 +104,6 @@ Add cards from a Json file to the Deck
         Add a card to the Deck    ${card_name}
     END
 
-    
 Remove a Card from Deck
     [Documentation]    This test case removes a card from the deck based on the provided card name.
     [Arguments]    ${Card_name}
@@ -118,7 +116,7 @@ Remove a Card from Deck
 
     # Step 3: Convert the Moxfield-ID to a string and remove square brackets
     ${Moxfield-ID}    Convert Json To String    ${Moxfield-ID}
-    ${Moxfield-ID}    Strip String   ${Moxfield-ID}    characters=[]""
+    ${Moxfield-ID}    Strip String    ${Moxfield-ID}    characters=[]""
 
     # Step 4: Log the Moxfield-ID (optional, for debugging)
     Log    Removing card with Moxfield-ID: ${Moxfield-ID}
@@ -129,5 +127,3 @@ Remove a Card from Deck
     # Step 6: Wait for the "Remove" option to appear and click on it
     Wait For Elements State    //span[contains(text(),"Remove")]
     Click    //span[contains(text(),"Remove")]
-
-
