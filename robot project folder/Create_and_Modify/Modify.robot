@@ -38,7 +38,7 @@ Remove a card from Deck
     in moxfield navigate to "Your Decks"
     Open decklist to add and remove cards    ${NAME_OF_THE_DECK}    ${NAME_OF_FORMAT}
     remove a Card from Deck    Skullclamp
-    Take Screenshot
+
 
 In moxfield navigate to your decks and delete a deck
     [Tags]    suite_trail_run   
