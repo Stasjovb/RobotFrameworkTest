@@ -7,10 +7,20 @@ Resource    ../Generic_keywords.resource
 *** Variables ***
 
 *** Keywords ***
-Log out of Moxfield
-    in moxfield Navigate to "Home"
-    Wait For Elements State    a#mainmenu-user 
+Log Out of Moxfield
+    [Documentation]    This keyword allows the user to log out of Moxfield.
+    
+    # Step 1: Navigate to the "Home" page
+    In Moxfield Navigate to "Home"
+    
+    # Step 2: Wait for the "User" menu element to be in the expected state
+    Wait For Elements State    a#mainmenu-user
+    
+    # Step 3: Click on the "User" menu
     Click    a#mainmenu-user
+    
+    # Step 4: Wait for the "Sign Out" link to be in the expected state
     Wait For Elements State     //div/a[text()='Sign out']
+    
+    # Step 5: Click on the "Sign Out" link
     Click     //div/a[text()='Sign out']
-

@@ -13,7 +13,9 @@ ${NAME_OF_FORMAT}    Commander / EDH
 ${NAME_OF_COMMANDER}   Najeela, the Blade-Blossom
 
 *** Test Cases ***
-Create a new commander Decks
+Create a new Commander Deck
     [Tags]    suite_trail_run
-    [Documentation]    This testcases test the creation of a commander deck
-    Create a Deck    ${NAME_OF_THE_DECK}    ${NAME_OF_FORMAT}    ${NAME_OF_COMMANDER}    deck_visibily_button=input[id*="visibility-private"]
+    [Documentation]    This test case verifies the creation of a new Commander deck with specific details.
+    
+    # Step 1: Create a new deck with the provided parameters
+    Create a Deck    ${NAME_OF_THE_DECK}    ${NAME_OF_FORMAT}    ${NAME_OF_COMMANDER}    deck_visibility_button=input[id*="visibility-private"]

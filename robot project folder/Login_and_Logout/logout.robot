@@ -9,7 +9,11 @@ ${VALID_PASSWORD}    testpartnerpassword1234
 
 
 *** Test Cases ***
-Log out of Moxfield and close the Browser
-    [Documentation]    This testcase test the Log out functionality
-    Log out of Moxfield
+Log Out of Moxfield and Close the Browser
+    [Documentation]    This test case tests the Log Out functionality.
+    
+    # Step 1: Log out of Moxfield (use the existing keyword)
+    Log Out of Moxfield
+    
+    # Step 2: Close the browser
     Close Browser
