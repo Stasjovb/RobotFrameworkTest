@@ -5,7 +5,7 @@ Library             Browser
 Library             OperatingSystem
 Library             JSONLibrary
 Library             Collections
-Library              String
+Library             String
 Variables           Decklist-Najeela.json
 Resource            ../Generic_keywords.resource
 
