@@ -19,7 +19,7 @@ Click on the verticle Elipsis to edit a decks properties in Moxfield
     in moxfield Navigate to "Your Decks"
 
     # Step 2: Click on the ellipsis menu for the specified deck
-    Click    //tr[.//*[contains(text(), '${Deck_name}')]]//a[contains(@class,"text-muted")][1]
+    Click    (//tr[.//*[contains(text(), '${Deck_name}')]]//a[contains(@class,"text-muted")])[1]
 
     # Step 3: Wait for the specified option (${Edit_properties}) to appear
     Wait For Elements State    //a[contains(text(),'${Edit_properties}')]
