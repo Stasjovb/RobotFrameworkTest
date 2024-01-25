@@ -109,8 +109,6 @@ Click the Next Turn button and verify card count changes and that the turn timer
     # Click the "draw" button
     Click    //div[@class="nGNk1A9L6Dr58lM5Lt7W zUHtiLXHXuZW799kNEsM mb-2"]
 
-    Sleep    10s
-
     # Calculate the expected value after the increment (increment by 1)
     ${expected_turn_timer}    Evaluate    ${initial_turn_timer} + 1
     Log To Console    ${expected_turn_timer}
