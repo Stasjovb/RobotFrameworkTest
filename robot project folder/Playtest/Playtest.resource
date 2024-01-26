@@ -102,13 +102,11 @@ Click the Next Turn button and verify card count changes and that the turn timer
     # Get the initial count of cards in the deck
     ${initial_deck_count_text}    Get Text
     ...    (//div[@class="Bg3czDxrK8jhqum7GG3Q small dropdown-toggle text-nowrap d-inline-block"])[2]
-
     # Extract the numerical value from the text and convert to an integer
     ${initial_deck_count}    Convert To Integer    ${initial_deck_count_text.split('(')[1].split(')')[0]}
 
     # Get the initial count of cards in your hand
     ${initial_hand_count}    Get Element Count    (//div[@class="bypJmZB_6FEXv4jeVecD"])[1]/div
-
     # Click the "draw" button
     Click    //div[@class="nGNk1A9L6Dr58lM5Lt7W zUHtiLXHXuZW799kNEsM mb-2"]
 
@@ -149,3 +147,16 @@ Click the Next Turn button and verify card count changes and that the turn timer
 
     # Verify that the hand count increased by 1
     Should Be Equal As Integers    ${new_hand_count}    ${initial_hand_count + 1}
+
+Restart the playtest by pressing the restart button and verify that all data resets
+    [Documentation]    Restart the playtest by pressing the restart button and verify that all data resets.
+    Wait For Elements State    //span[text()='R']
+    Click    //span[text()='R']
+    Wait For Elements State    //p[text()='Are you sure you want to restart the game?']
+    Click    //span[text()='Restart']
+    # Verify that the turn timer is back to the initial number
+    ${initial_turn_timer_text}    Get Text    (//a[@class="navbar-text text-white cursor-pointer no-outline"])[1]
+    Should Be Equal As Strings    ${initial_turn_timer_text}    Turn 1
+    # Verify that the hand count is back to the initial count
+    ${initial_hand_count}    Get Element Count    (//div[@class="bypJmZB_6FEXv4jeVecD"])[1]/div
+    Should Be Equal As Integers    ${initial_hand_count}    7

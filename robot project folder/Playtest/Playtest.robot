@@ -87,3 +87,25 @@ Verify that pressing the Next Turn button puts another card in your hand and inc
 
     # Step 5: Clicking the Next Turn button and verifying that the card count changes and that the turn timer increments
     Click the Next Turn button and verify card count changes and that the turn timer increments
+
+Verify that pressing the restart button resets all the information.
+    # Step 1: Navigating to "Your Decks" in Moxfield
+    In Moxfield Navigate to "Your Decks"
+
+    # Step 2: Opening a decklist for adding and removing cards
+    Open decklist to add and remove cards    ${NAME_OF_THE_DECK}    ${NAME_OF_FORMAT}
+
+    # Step 3: Navigating to the Playtest simulator
+    Navigate to the Playtest simulator
+
+    # Step 4: Counting the number of cards in hand
+    Count the number of cards in hand and verify
+    
+    # Step 5: Loop through 7 turns
+    FOR  ${i}  IN RANGE   7
+       Click the Next Turn button and verify card count changes and that the turn timer increments
+    END
+    
+    # Step 6: Restart the game and verify that all the data resets
+    Restart the playtest by pressing the restart button and verify that all data resets
+    
