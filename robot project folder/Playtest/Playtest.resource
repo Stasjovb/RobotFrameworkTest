@@ -160,3 +160,19 @@ Restart the playtest by pressing the restart button and verify that all data res
     # Verify that the hand count is back to the initial count
     ${initial_hand_count}    Get Element Count    (//div[@class="bypJmZB_6FEXv4jeVecD"])[1]/div
     Should Be Equal As Integers    ${initial_hand_count}    7
+    ${cards_on_battlefield}    Get Element Count    //div[contains(@class, 'battlefield')]//div[contains(@class, 'CBc0hpZC28HswCgpsi2l dropdown')]
+    Should Be Equal As Integers    ${cards_on_battlefield}    0
+
+  #  //div[contains(@class, 'battlefield')]
+  #  //div[contains(@class, 'battlefield')]//div[contains(@class, 'CBc0hpZC28HswCgpsi2l dropdown')]
+
+Put a Card On the Battlefield
+    [Documentation]    Put a card from your hand onto the battlefield.
+    Click With Options    ((//div[@class="bypJmZB_6FEXv4jeVecD"])[1]/div)[1]    clickCount=2
+
+Verify Card Count On Battlefield
+    [Documentation]    Verify the count of cards on the battlefield.
+    [Arguments]    ${expected_count}
+    ${cards_on_battlefield}    Get Element Count    //div[contains(@class, 'battlefield')]//div[contains(@class, 'CBc0hpZC28HswCgpsi2l dropdown')]
+    Should Be Equal As Integers    ${cards_on_battlefield}    ${expected_count}
+    

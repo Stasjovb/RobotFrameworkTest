@@ -101,9 +101,11 @@ Verify that pressing the restart button resets all the information.
     # Step 4: Counting the number of cards in hand
     Count the number of cards in hand and verify
     
-    # Step 5: Loop through 7 turns
+    # Step 5: Loop through 7 turns where you draw and play a card
     FOR  ${i}  IN RANGE   7
        Click the Next Turn button and verify card count changes and that the turn timer increments
+       Put a card from your hand onto the battlefield
+       Verify Card Count On Battlefield    expected_count=${i+1}
     END
     # Step 6: Restart the game and verify that all the data resets
     Restart the playtest by pressing the restart button and verify that all data resets
