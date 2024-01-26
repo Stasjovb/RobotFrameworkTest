@@ -105,7 +105,6 @@ Verify that pressing the restart button resets all the information.
     FOR  ${i}  IN RANGE   7
        Click the Next Turn button and verify card count changes and that the turn timer increments
     END
-    
     # Step 6: Restart the game and verify that all the data resets
     Restart the playtest by pressing the restart button and verify that all data resets
     
