@@ -108,21 +108,10 @@ Remove a Card from Deck
     [Documentation]    This test case removes a card from the deck based on the provided card name.
     [Arguments]    ${Card_name}
 
-    # Step 1: Load card data from a JSON file
-    ${file}    Load Json From File    ${CURDIR}${/}Decklist-Najeela.json
-
-    # Step 2: Get the Moxfield-ID of the card based on its name
-    ${Moxfield-ID}    Get Value From Json    ${file}    $..cards[?(@.name == '${Card_name}')].Moxfield-ID
-
-    # Step 3: Convert the Moxfield-ID to a string and remove square brackets
-    ${Moxfield-ID}    Convert Json To String    ${Moxfield-ID}
-    ${Moxfield-ID}    Strip String    ${Moxfield-ID}    characters=[]""
-
-    # Step 4: Log the Moxfield-ID (optional, for debugging)
-    Log    Removing card with Moxfield-ID: ${Moxfield-ID}
+   
 
     # Step 5: Click on the card in the deck to open the card options
-    Click    //div[@data-hash="${Moxfield-ID}"]//a//span[@class="fa-stack-1x fa-solid fa-caret-down icon-stack-small"]
+    Click    (//a[normalize-space(.) = '${Card_name}']/following::div[contains(@class, 'text-end')])[1]
 
     # Step 6: Wait for the "Remove" option to appear and click on it
     Wait For Elements State    //span[contains(text(),"Remove")]

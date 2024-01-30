@@ -69,7 +69,7 @@ Remove a card from Deck
     Open decklist to add and remove cards    ${NAME_OF_THE_DECK}    ${NAME_OF_FORMAT}
 
     # Step 3: Remove a specific card (in this case, "Skullclamp") from the deck
-    Remove a card from Deck    Skullclamp
+    Remove a card from Deck    Veil of Summer
 
 Delete a Deck on Moxfield
     [Documentation]    This test case navigates to "Your Decks" on Moxfield, deletes a specific deck, and confirms the deletion.

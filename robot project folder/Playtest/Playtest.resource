@@ -162,7 +162,7 @@ Restart the playtest by pressing the restart button and verify that all data res
     Should Be Equal As Integers    ${initial_hand_count}    7
     ${cards_on_battlefield}    Get Element Count    //div[contains(@class, 'battlefield')]//div[contains(@class, 'CBc0hpZC28HswCgpsi2l dropdown')]
     Should Be Equal As Integers    ${cards_on_battlefield}    0
-
+    Verify the lifetotal
   #  //div[contains(@class, 'battlefield')]
   #  //div[contains(@class, 'battlefield')]//div[contains(@class, 'CBc0hpZC28HswCgpsi2l dropdown')]
 
