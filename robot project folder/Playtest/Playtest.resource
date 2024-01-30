@@ -183,13 +183,25 @@ Shuffle the deck
 
 Verify the lifetotal
     [Documentation]    This keyword verifies the lifetotal of the user
-    ${current_life_total}    Get Text    (//a[@class="navbar-text pe-3 text-white cursor-pointer no-outline"]/text())[1]
+    Wait For Elements State    (//a[@class="navbar-text pe-3 text-white cursor-pointer no-outline"])[2]
+    ${current_life_total}    Get Text    (//a[@class="navbar-text pe-3 text-white cursor-pointer no-outline"])[2]
     Wait For Elements State    //a[text()=${current_life_total}]
     
 
 alter the lifetotal
     [Documentation]    This keyword alters the life total of the user 
     ...    the argument ${plus/min} determins wether to add or subtract life if you fill in "plus" the life is added but if you fill in "minus" the life is subtracted
-    [Arguments]    ${plus/min}
-    Wait For Elements State    svg[data-icon="${plus/min}"]
-    Click    svg[data-icon="${plus/min}"]
+    [Arguments]    ${plus_or_min}    ${Amount_to_alter}
+    Verify the lifetotal
+
+    IF  '${plus_or_min}' == 'plus'
+    Wait For Elements State    path[d*="M240"]
+    Click With Options   path[d*="M240"]   clickCount=${Amount_to_alter}
+    Verify the lifetotal
+    ELSE IF    '${plus_or_min}' == 'minus'
+    Wait For Elements State    path[d*="M432"]
+    Click With Options   path[d*="M432"]   clickCount=${Amount_to_alter}
+    Verify the lifetotal
+    END
+
+    

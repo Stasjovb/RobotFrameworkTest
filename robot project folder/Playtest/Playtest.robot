@@ -128,4 +128,26 @@ Press the Shuffle button to shuffle your deck
     # Step 4: Shuffle the deck by pressing the shuffle button
     Shuffle the deck
 
+
+verify and alter your life total in the playtest simulator
+    [Documentation]    This keyword tests the functionality of verifying and altering the life total in the Playtest simulator on Moxfield.
+...    It verifies that the lifetotal is correctly displayed and then alters it by subtracting 10.
+...    Before using this keyword, ensure that you have navigated to "Your Decks" in Moxfield
+...    and opened the desired decklist for adding and removing cards.
+...    Explanation of Variables:
+...    - ${NAME_OF_THE_DECK}: The name of the decklist you want to work with.
+...    - ${NAME_OF_FORMAT}: The format of the decklist (e.g., Standard, Modern).
+    # Step 1: Navigating to "Your Decks" in Moxfield
+    In Moxfield Navigate to "Your Decks"
+
+    # Step 2: Opening a decklist for adding and removing cards
+    Open decklist to add and remove cards    ${NAME_OF_THE_DECK}    ${NAME_OF_FORMAT}
+
+    # Step 3: Navigating to the Playtest simulator
+    Navigate to the Playtest simulator
+
+    # Step 4: Verifies that the lifetotal is correctly displayed in the Playtest simulator.
     Verify the lifetotal
+
+    # Step 5: Alters the lifetotal in the Playtest simulator by subtracting 10 to simulate a change in life points.
+    alter the lifetotal    minus     10
