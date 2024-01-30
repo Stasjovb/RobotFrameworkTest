@@ -166,7 +166,7 @@ Restart the playtest by pressing the restart button and verify that all data res
   #  //div[contains(@class, 'battlefield')]
   #  //div[contains(@class, 'battlefield')]//div[contains(@class, 'CBc0hpZC28HswCgpsi2l dropdown')]
 
-Put a Card On the Battlefield
+Put a Card from your hand On the Battlefield
     [Documentation]    Put a card from your hand onto the battlefield.
     Click With Options    ((//div[@class="bypJmZB_6FEXv4jeVecD"])[1]/div)[1]    clickCount=2
 
@@ -175,4 +175,33 @@ Verify Card Count On Battlefield
     [Arguments]    ${expected_count}
     ${cards_on_battlefield}    Get Element Count    //div[contains(@class, 'battlefield')]//div[contains(@class, 'CBc0hpZC28HswCgpsi2l dropdown')]
     Should Be Equal As Integers    ${cards_on_battlefield}    ${expected_count}
+
+Shuffle the deck
+    Wait For Elements State    //span[text()='S']
+    Click    //span[text()='S']
+    Wait For Elements State    //span[contains(text(),'Shuffled your library!')]
+
+Verify the lifetotal
+    [Documentation]    This keyword verifies the lifetotal of the user
+    Wait For Elements State    (//a[@class="navbar-text pe-3 text-white cursor-pointer no-outline"])[2]
+    ${current_life_total}    Get Text    (//a[@class="navbar-text pe-3 text-white cursor-pointer no-outline"])[2]
+    Wait For Elements State    //a[text()=${current_life_total}]
+    
+
+alter the lifetotal
+    [Documentation]    This keyword alters the life total of the user 
+    ...    the argument ${plus/min} determins wether to add or subtract life if you fill in "plus" the life is added but if you fill in "minus" the life is subtracted
+    [Arguments]    ${plus_or_min}    ${Amount_to_alter}
+    Verify the lifetotal
+
+    IF  '${plus_or_min}' == 'plus'
+    Wait For Elements State    path[d*="M240"]
+    Click With Options   path[d*="M240"]   clickCount=${Amount_to_alter}
+    Verify the lifetotal
+    ELSE IF    '${plus_or_min}' == 'minus'
+    Wait For Elements State    path[d*="M432"]
+    Click With Options   path[d*="M432"]   clickCount=${Amount_to_alter}
+    Verify the lifetotal
+    END
+
     
